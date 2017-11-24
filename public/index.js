@@ -141,6 +141,13 @@
       };
       n++;
     }
+    // 初始化图片数据
+    var initPic = function initPic(container) {
+      var el = document;
+      if (container) el = container;
+      imgs = el.getElementsByTagName('img');
+    };
+
     window.onscroll = function () {
       verticalScroll(imgs);
     };

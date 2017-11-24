@@ -1,6 +1,6 @@
 {
   "name": "tw-lazy-loading",
-  "version": "0.0.4",
+  "version": "0.0.8",
   "description": "this is for picture lazy loading",
   "main": "blurry.js",
   "scripts": {

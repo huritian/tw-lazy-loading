@@ -1,5 +1,8 @@
 # tw-lazy-loading
 This is for picture lazy loading
 
-# quick start
+# install
 npm install tw-lazy-loading
+
+#操作document
+1:  

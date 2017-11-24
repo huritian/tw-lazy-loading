@@ -67,9 +67,19 @@
       }
       n++
     }
+    // 初始化图片数据
+    let initPic = container => {
+      let el = document
+      if (container) el = container
+      imgs = el.getElementsByTagName('img')
+    }
+
     window.onscroll = function () {
       verticalScroll(imgs)
     }
   }
   window.HandleClearPic = HandleClearPic
+  module.exports = {
+    HandleClearPic
+  }
 })()
