@@ -57,7 +57,7 @@
       let src = obj.src.replace(blurry, '')
       let img = new Image()
       for (let key in obj.style) {
-        img.style[key] = obj.style[key]
+        if (obj.style.hasOwnProperty(key)) img.style[key] = obj.style[key]
       }
       img.className = obj.className
       img.src = src

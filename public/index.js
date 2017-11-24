@@ -65,21 +65,26 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-;(_ => {
-  var HandleClearPic = function (options = {}) {
-    let n = 0;
-    let minH = 20;
-    let clientH = document.documentElement.clientHeight;
-    let container = document;
-    let imgs = container.getElementsByTagName('img');
-    let obj = {};
-    let blurry = '?x-oss-process=image/blur,r_3,s_2';
+"use strict";
+
+
+;(function (_) {
+  var HandleClearPic = function HandleClearPic() {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    var n = 0;
+    var minH = 20;
+    var clientH = document.documentElement.clientHeight;
+    var container = document;
+    var imgs = container.getElementsByTagName('img');
+    var obj = {};
+    var blurry = '?x-oss-process=image/blur,r_3,s_2';
     // 富文本添加模糊图片
-    let handleBLur = content => {
+    var handleBLur = function handleBLur(content) {
       if (typeof content !== 'string') return console.error('handleBlur函数传参数据类型为String');
-      content = content.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, (match, capture) => {
+      content = content.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
         return match.replace(capture, capture + blurry);
       });
       return content;
@@ -101,11 +106,11 @@
     blurry = obj.blurry;
     // 滚动判定
     function verticalScroll(imgsArr) {
-      let scrollT = document.documentElement.scrollTop;
-      for (let i = n; i < imgsArr.length; i++) {
-        let offsetT = imgsArr[i].offsetTop;
+      var scrollT = document.documentElement.scrollTop;
+      for (var i = n; i < imgsArr.length; i++) {
+        var offsetT = imgsArr[i].offsetTop;
         if (clientH <= offsetT) {
-          let h = offsetT - scrollT - clientH;
+          var h = offsetT - scrollT - clientH;
           if (h <= minH) {
             createImg(imgsArr[i]);
           }
@@ -119,19 +124,19 @@
     };
     // 修改成清晰图片
     function createImg(obj) {
-      let flag = obj.src.indexOf(blurry);
+      var flag = obj.src.indexOf(blurry);
       if (flag < 0) {
         return n++;
       }
-      let src = obj.src.replace(blurry, '');
-      let img = new Image();
-      for (let key in obj.style) {
-        img.style[key] = obj.style[key];
+      var src = obj.src.replace(blurry, '');
+      var img = new Image();
+      for (var key in obj.style) {
+        if (obj.style.hasOwnProperty(key)) img.style[key] = obj.style[key];
       }
       img.className = obj.className;
       img.src = src;
       img.onload = function () {
-        let parent = obj.parentNode;
+        var parent = obj.parentNode;
         if (parent) parent.replaceChild(img, obj);
       };
       n++;
