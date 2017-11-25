@@ -1,7 +1,7 @@
 module.exports = {
   entry: __dirname + '/src/blurry.js',
   output: {
-    path: __dirname + "/public",
+    path: __dirname + "/dist",
     filename: 'index.js'
   },    
   module: {    
