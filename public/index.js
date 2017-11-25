@@ -70,90 +70,89 @@
 "use strict";
 
 
-;(function (_) {
-  var HandleClearPic = function HandleClearPic() {
-    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+var HandleClearPic = function HandleClearPic() {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    var n = 0;
-    var minH = 20;
-    var clientH = document.documentElement.clientHeight;
-    var container = document;
-    var imgs = container.getElementsByTagName('img');
-    var obj = {};
-    var blurry = '?x-oss-process=image/blur,r_3,s_2';
-    // 富文本添加模糊图片
-    var handleBLur = function handleBLur(content) {
-      if (typeof content !== 'string') return console.error('handleBlur函数传参数据类型为String');
-      content = content.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
-        return match.replace(capture, capture + blurry);
-      });
-      return content;
-    };
-    window.handleBLur = handleBLur;
-    if (options) {
-      obj = JSON.parse(JSON.stringify(options));
-    }
-    if (obj.minH) {
-      if (typeof obj.minH !== 'number') return console.error('参数minH数据类型为Number');
-      minH = obj.minH;
-    }
-    if (obj.blurry) {
-      if (typeof obj.blurry !== 'string') return console.error('参数blurry数据类型为String');
-    }
-    if (obj.container) {
-      container = obj.container;
-    }
+  var n = 0;
+  var minH = 20;
+  var clientH = document.documentElement.clientHeight;
+  var container = document;
+  var imgs = container.getElementsByTagName('img');
+  var obj = {};
+  var blurry = '?x-oss-process=image/blur,r_3,s_2';
+  // 富文本添加模糊图片
+  var handleBLur = function handleBLur(content) {
+    if (typeof content !== 'string') return console.error('handleBlur函数传参数据类型为String');
+    content = content.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
+      return match.replace(capture, capture + blurry);
+    });
+    return content;
+  };
+  // exports.handleBLur = handleBLur
+  if (options) {
+    obj = JSON.parse(JSON.stringify(options));
+  }
+  if (obj.minH) {
+    if (typeof obj.minH !== 'number') return console.error('参数minH数据类型为Number');
+    minH = obj.minH;
+  }
+  if (obj.blurry) {
+    if (typeof obj.blurry !== 'string') return console.error('参数blurry数据类型为String');
     blurry = obj.blurry;
-    // 滚动判定
-    function verticalScroll(imgsArr) {
-      var scrollT = document.documentElement.scrollTop;
-      for (var i = n; i < imgsArr.length; i++) {
-        var offsetT = imgsArr[i].offsetTop;
-        if (clientH <= offsetT) {
-          var h = offsetT - scrollT - clientH;
-          if (h <= minH) {
-            createImg(imgsArr[i]);
-          }
-        } else {
+  }
+  if (obj.container) {
+    container = obj.container;
+  }
+  // 滚动判定
+  function verticalScroll(imgsArr) {
+    var scrollT = document.documentElement.scrollTop;
+    for (var i = n; i < imgsArr.length; i++) {
+      var offsetT = imgsArr[i].offsetTop;
+      if (clientH <= offsetT) {
+        var h = offsetT - scrollT - clientH;
+        if (h <= minH) {
           createImg(imgsArr[i]);
         }
+      } else {
+        createImg(imgsArr[i]);
       }
     }
-    window.onload = function () {
-      verticalScroll(imgs);
-    };
-    // 修改成清晰图片
-    function createImg(obj) {
-      var flag = obj.src.indexOf(blurry);
-      if (flag < 0) {
-        return n++;
-      }
-      var src = obj.src.replace(blurry, '');
-      var img = new Image();
-      for (var key in obj.style) {
-        if (obj.style.hasOwnProperty(key)) img.style[key] = obj.style[key];
-      }
-      img.className = obj.className;
-      img.src = src;
-      img.onload = function () {
-        var parent = obj.parentNode;
-        if (parent) parent.replaceChild(img, obj);
-      };
-      n++;
-    }
-    // 初始化图片数据
-    var initPic = function initPic(container) {
-      var el = document;
-      if (container) el = container;
-      imgs = el.getElementsByTagName('img');
-    };
-
-    window.onscroll = function () {
-      verticalScroll(imgs);
-    };
+  }
+  window.onload = function () {
+    verticalScroll(imgs);
   };
-  window.HandleClearPic = HandleClearPic;
-})();
+  // 修改成清晰图片
+  function createImg(obj) {
+    var flag = obj.src.indexOf(blurry);
+    if (flag < 0) {
+      return n++;
+    }
+    var src = obj.src.replace(blurry, '');
+    var img = new Image();
+    for (var key in obj.style) {
+      if (obj.style.hasOwnProperty(key)) img.style[key] = obj.style[key];
+    }
+    img.className = obj.className;
+    img.src = src;
+    img.onload = function () {
+      var parent = obj.parentNode;
+      if (parent) parent.replaceChild(img, obj);
+    };
+    n++;
+  }
+  // 初始化图片数据
+  var initPic = function initPic(container) {
+    var el = document;
+    if (container) el = container;
+    imgs = el.getElementsByTagName('img');
+  };
+
+  window.onscroll = function () {
+    verticalScroll(imgs);
+  };
+};
+// exports.HandleClearPic = HandleClearPic
+module.exports = HandleClearPic;
 
 /***/ })
 /******/ ]);
