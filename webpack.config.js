@@ -29,16 +29,12 @@ if (process.env.NODE_ENV !== 'production') {
       contentBase: "./", 
       historyApiFallback:true,
       inline:true,
-      hot:true
+      hot:true,
+      port: '8091'
     },
     watch: true,
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new HtmlWebpackPlugin({
-        filename: __dirname + '/example/richText.html',
-        template: __dirname + '/example/richText.html',
-        inject: true
-      }),
       new webpack.DefinePlugin({
         'process.env': 'development'
       })
@@ -49,7 +45,9 @@ if (process.env.NODE_ENV !== 'production') {
     entry: __dirname + '/src/blurry.js',
     output: {
       path: __dirname + "/dist",
-      filename: 'index.js'
+      filename: 'index.js',
+      libraryTarget: 'umd',
+      library: 'LazyLoad'
     },
     plugins: [
       new webpack.DefinePlugin({

@@ -1,5 +1,5 @@
 ;(_ => {
-  var HandleClearPic = function (options = {}) {
+  var LazyLoad = function (options = {}) {
     let n = 0
     let minH = 20
     let clientH = document.documentElement.clientHeight
@@ -8,7 +8,7 @@
     let obj = {}
     let blurry = '?x-oss-process=image/blur,r_3,s_2'
     // 富文本添加模糊图片
-    let handleBLur = (content) => {
+    LazyLoad.prototype.handleBLur = (content) => {
       if (typeof content !== 'string') return console.error('handleBlur函数传参数据类型为String')
       content = content.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, (match, capture) => {
         return match.replace(capture, capture + blurry)
@@ -68,7 +68,7 @@
       n++
     }
     // 初始化图片数据
-    let initPic = container => {
+    LazyLoad.prototype.initPic = container => {
       let el = document
       if (container) el = container
       imgs = el.getElementsByTagName('img')
@@ -78,6 +78,6 @@
       verticalScroll(imgs)
     }
   }
-  // exports.HandleClearPic = HandleClearPic
-  module.exports = HandleClearPic
+  // exports.LazyLoad = LazyLoad
+  module.exports = LazyLoad
 })();
