@@ -2,15 +2,15 @@
 tw-lazy-loading
 图片懒加载
 
-#example
+# example
 可以下载浏览./example/richText.html
 启动示例命令行
 npm run dev
 
-#下载安装
+# 下载安装
 npm install tw-lazy-loading
 
-#使用
+# 使用
 import LazyLoad from 'tw-lazy-loading'
 需要使用处
 let LazyLoad = new LazyLoad(option)
@@ -21,7 +21,7 @@ let LazyLoad = new LazyLoad(option)
   delay // 选填，屏幕滚动间隔多久执行一次图片转化为清晰图片的函数
 }
 
-#暴露的方法
+# 暴露的方法
 1、LazyLoad.handleBLur(content) 给富文本添加OSS图片模糊的后缀
 arg content 必填，富文本内容
 函数返回处理过的content
