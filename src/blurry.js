@@ -48,17 +48,14 @@
     window.onload = function () {
       verticalScroll(imgs)
     }
-    // 修改成清晰图片
+    // 修改成清晰图片的style, className，和src属性
     function createImg(obj){
       let flag = obj.src.indexOf(blurry)
-      if (flag < 0) {
-        return n++
-      }
+      if (flag < 0) return n++
       let src = obj.src.replace(blurry, '')
       let img = new Image()
-      for (let key in obj.style) {
-        if (obj.style.hasOwnProperty(key)) img.style[key] = obj.style[key]
-      }
+      // 获取图片的style
+      if (obj.style) Object.assign(img.style, obj.style)
       img.className = obj.className
       img.src = src
       img.onload = function () {
