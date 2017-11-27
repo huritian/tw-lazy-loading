@@ -1,6 +1,7 @@
 ;(_ => {
   /**
-   *  My method description. Image lazy loading
+   *  LazyLoad
+   *  @description My method description. Image lazy loading
    *  @constructor LazyLoad
    *  @version 0.0.19
    *  @example new LazyLoad({min: 20, blurry: '?x-oss-process=image/blur,r_3,s_2'})
@@ -9,43 +10,15 @@
    *  @param {object} container 父级元素
    *  @param {string} blurry oss后缀（图片模糊）
    *  @param {number} delay 触发事件的时间间隔
-   *  @author huxin <993512782@qq.com>
    */
   var LazyLoad = function (options = {}) {
-    /**
-     * @constant
-     * @default
-     */
     let n = 0
-    /**
-     * @constant
-     * @default
-     */
     let minH = 20
-    /**
-     * @constant
-     * @default
-     */
     let clientH = document.documentElement.clientHeight
-    /**
-     * @constant
-     * @default
-     */
     let container = document
-    /**
-     * @default
-     */
     let imgs = container.getElementsByTagName('img')
     let obj = {}
-    /**
-     * @constant
-     * @default
-     */
     let blurry = '?x-oss-process=image/blur,r_3,s_2'
-    /**
-     * @constant
-     * @default
-     */
     let delay = 50
     if (options) {
       obj = JSON.parse(JSON.stringify(options))
