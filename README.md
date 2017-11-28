@@ -1,6 +1,6 @@
 # 项目名称
 tw-lazy-loading
-图片懒加载
+图片懒加载(只针对垂直滚动的情况)
 
 # example
 可以下载浏览./example/richText.html
@@ -22,10 +22,10 @@ npm install tw-lazy-loading
 ```javascript
 let LazyLoad = new LazyLoad(option)
 option = {
-  minH // 选填，屏幕滚动到什么位置时调用图片清晰函数<br>
-  blurry // 选填，图片模糊OSS参数<br>
-  container // 选填， 标签容器，在什么标签内，使用本方法<br>
-  delay // 选填，屏幕滚动间隔多久执行一次图片转化为清晰图片的函数<br>
+  minH // 选填，屏幕滚动到什么位置时调用图片清晰函数
+  blurry // 选填，图片模糊OSS参数
+  container // 选填， 标签容器，在什么标签内，使用本方法
+  delay // 选填，屏幕滚动间隔多久执行一次图片转化为清晰图片的函数
 }
 ```
 
