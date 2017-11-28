@@ -12,7 +12,11 @@ npm install tw-lazy-loading
 
 # 使用
 > import LazyLoad from 'tw-lazy-loading'
-
+>标签引入
+```javascript
+<script src="./node_modules/tw-lazy-loading/dist/index.js"></script>
+```
+>引入dist包下面的index.js
 需要使用处
 
 > let LazyLoad = new LazyLoad(option)
@@ -20,17 +24,17 @@ npm install tw-lazy-loading
 
 ```javascript
 option = {<br>
-&nbsp;&nbsp;minH // 选填，屏幕滚动到什么位置时调用图片清晰函数<br>
-&nbsp;&nbsp;blurry // 选填，图片模糊OSS参数<br>
-&nbsp;&nbsp;container // 选填， 标签容器，在什么标签内，使用本方法<br>
-&nbsp;&nbsp;delay // 选填，屏幕滚动间隔多久执行一次图片转化为清晰图片的函数<br>
+  minH // 选填，屏幕滚动到什么位置时调用图片清晰函数<br>
+  blurry // 选填，图片模糊OSS参数<br>
+  container // 选填， 标签容器，在什么标签内，使用本方法<br>
+  delay // 选填，屏幕滚动间隔多久执行一次图片转化为清晰图片的函数<br>
 }
 ```
 
 # 暴露的方法
-1、LazyLoad.handleBLur(content) 给富文本添加OSS图片模糊的后缀<br>
-&nbsp;&nbsp;@parma content {string} 富文本<br>
-&nbsp;&nbsp;@return content<br>
+1、LazyLoad.handleBLur(content) 给富文本添加OSS图片模糊的后缀
+> @parma content {string} 富文本
+> @return content
 
 2、LazyLoad.initPic()
-&nbsp;&nbsp;页面调用接口，增加了页面的图片数量时，调用此接口，修改图片容器大小，没有返回值
+> 页面调用接口，增加了页面的图片数量时，调用此接口，修改图片容器大小，没有返回值

@@ -6,10 +6,10 @@
    *  @version 0.0.19
    *  @example new LazyLoad({min: 20, blurry: '?x-oss-process=image/blur,r_3,s_2'})
    *  @method LazyLoad 执行函数函数懒加载
-   *  @param {number} minH 图片距离屏幕下边框的距离小于minH时，执行createImg方法
-   *  @param {object} container 父级元素
-   *  @param {string} blurry oss后缀（图片模糊）
-   *  @param {number} delay 触发事件的时间间隔
+   *  @param {number} [minH=20] 图片距离屏幕下边框的距离小于minH时，执行createImg方法
+   *  @param {object} [container=document] 父级元素
+   *  @param {string} [blurry='?x-oss-process=image/blur,r_3,s_2'] oss后缀（图片模糊）
+   *  @param {number} [delay=50] 触发事件的时间间隔
    */
   var LazyLoad = function (options = {}) {
     let n = 0
@@ -38,12 +38,7 @@
       if (typeof obj.delay !== 'number') return console.error('参数delay数据类型为Number')
       delay = obj.delay
     }
-    /**
-     *  @method debounce 控制图片懒加载的间隔时间
-     *  @param {} minH 图片距离屏幕下边框的距离小于minH时，执行createImg方法
-     *  @param {function} fn 控制函数
-     *  @param {delay} 间隔时间 oss后缀（图片模糊）
-     */
+    // 懒加载执次数控制器
     function debounce(fn, delay) {
       let timer = null;
       return _ => {
@@ -54,10 +49,7 @@
         }, delay);
       }
     }
-    /**
-     *  @method verticalScroll 判定屏幕滚动
-     *  @param {array} imgsArr 图片集合
-     */
+    // 屏幕滚动
     function verticalScroll(imgsArr) {
       let scrollT = document.documentElement.scrollTop
       for (let i = n; i < imgsArr.length; i++) {
@@ -72,10 +64,7 @@
         }
       }
     }
-    /**
-     *  @method createImg 判定屏幕滚动
-     *  @param {object} obj img标签
-     */
+    // 新建清晰图片
     function createImg(obj){
       let flag = obj.src.indexOf(blurry)
       if (flag < 0) return n++
@@ -111,19 +100,14 @@
       if (container) el = container
       imgs = el.getElementsByTagName('img')
     }
-    /**
-     *  @method onload 页面加载完成时调用
-     */
+    // 页面加载完成时调用
     window.onload = function () {
       verticalScroll(imgs)
     }
-    /**
-     *  @method onscroll 页面滚动时调用
-     */
+    // 页面滚动时调用
     window.onscroll = debounce(() => {
       verticalScroll(imgs)
     }, delay)
   }
-  // exports.LazyLoad = LazyLoad
   module.exports = LazyLoad
 })();
