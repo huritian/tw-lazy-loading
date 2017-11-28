@@ -17,13 +17,11 @@ npm install tw-lazy-loading
 <script src="./node_modules/tw-lazy-loading/dist/index.js"></script>
 ```
 >引入dist包下面的index.js
-需要使用处
-
-> let LazyLoad = new LazyLoad(option)
-其中
+>需要使用处
 
 ```javascript
-option = {<br>
+let LazyLoad = new LazyLoad(option)
+option = {
   minH // 选填，屏幕滚动到什么位置时调用图片清晰函数<br>
   blurry // 选填，图片模糊OSS参数<br>
   container // 选填， 标签容器，在什么标签内，使用本方法<br>
