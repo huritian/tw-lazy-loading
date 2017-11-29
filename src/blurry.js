@@ -17,12 +17,9 @@
     let clientH = document.documentElement.clientHeight
     let container = document
     let imgs = container.getElementsByTagName('img')
-    let obj = {}
+    let obj = Object.assign({}, options)
     let blurry = '?x-oss-process=image/blur,r_3,s_2'
     let delay = 50
-    if (options) {
-      obj = JSON.parse(JSON.stringify(options))
-    }
     if (obj.minH) {
       if (typeof obj.minH !== 'number') return console.error('参数minH数据类型为Number')
       minH = obj.minH
@@ -33,6 +30,7 @@
     }
     if (obj.container) {
       container = obj.container
+      imgs = container.getElementsByTagName('img')
     }
     if (obj.delay) {
       if (typeof obj.delay !== 'number') return console.error('参数delay数据类型为Number')
@@ -81,24 +79,27 @@
       n++
     }
     /**
-     *  @method handleBLur 富文本添加图片模糊
+     *  @method blurPic 富文本添加图片模糊
      *  @param {string} content 富文本内容
      *  @returns {string} content
      */
-    this.handleBLur = (content) => {
+    this.blurPic = (content) => {
       if (typeof content !== 'string') return console.error('handleBlur函数传参数据类型为String')
       content = content.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, (match, capture) => {
         return match.replace(capture, capture + blurry)
     })
+      this.initPic()
       return content
     }
     /**
      *  @method initPic 图片初始化，当图片数量变化时使用
      */
-    this.initPic = container => {
-      let el = document
-      if (container) el = container
-      imgs = el.getElementsByTagName('img')
+    this.initPic = _ => {
+      setTimeout(_ => {
+        let el = document
+        if (container) el = container
+        imgs = el.getElementsByTagName('img')
+      }, 0)
     }
     // 页面加载完成时调用
     window.onload = function () {

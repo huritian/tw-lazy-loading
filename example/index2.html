@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    div {
+      width: 100%!important;
+    }
+
+    div img {
+      width: 100%!important;
+    }
+  </style>
 </head>
 <body>
   <div></div>
@@ -17,7 +26,7 @@
       blurry: '?x-oss-process=image/blur,r_5,s_2',
       container: document
     })
-    var newVal = LazyLoading.handleBLur(content)
+    var newVal = LazyLoading.blurPic(content)
     document.getElementsByTagName('div')[0].innerHTML = newVal
   </script>
 </body>

@@ -7,5 +7,5 @@ let LazyLoading = new LazyLoad({
   blurry: '?x-oss-process=image/blur,r_5,s_2',
   container: document
 })
-let newVal = LazyLoading.handleBLur(content)
+let newVal = LazyLoading.blurPic(content)
 document.getElementsByTagName('div')[0].innerHTML = newVal

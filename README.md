@@ -30,7 +30,7 @@ option = {
 ```
 
 # 暴露的方法
-1、LazyLoad.handleBLur(content) 给富文本添加OSS图片模糊的后缀
+1、LazyLoad.handleBlur(content) 给富文本添加OSS图片模糊的后缀
 > @parma content {string} 富文本
 > @return content
 
