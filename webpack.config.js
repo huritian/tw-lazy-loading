@@ -30,7 +30,8 @@ if (process.env.NODE_ENV !== 'production') {
       historyApiFallback:true,
       inline:true,
       hot:true,
-      port: '8091'
+      port: '8091',
+      disableHostCheck: true
     },
     watch: true,
     plugins: [

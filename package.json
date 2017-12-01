@@ -1,6 +1,6 @@
 {
   "name": "tw-lazy-loading",
-  "version": "1.1.1",
+  "version": "1.2.2",
   "description": "this is for picture lazy loading",
   "main": "dist/index.js",
   "scripts": {
