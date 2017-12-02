@@ -30,6 +30,7 @@ if (process.env.NODE_ENV !== 'production') {
       historyApiFallback:true,
       inline:true,
       hot:true,
+      host: '192.168.31.124',
       port: '8091',
       disableHostCheck: true
     },

@@ -39,3 +39,6 @@ option = {
 
 2、LazyLoad.initPic()
 > 页面调用接口，增加了页面的图片数量时，调用此接口，修改图片容器大小，没有返回值
+
+# 注意事项
+> 如果DOM的IMG标签处，自定义了OSS的模糊句柄，那么需要在option内部传入blurParame
