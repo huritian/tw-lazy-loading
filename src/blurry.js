@@ -7,6 +7,7 @@
    *  @example new LazyLoad({min: 20, blurry: '?x-oss-process=image/blur,r_3,s_2'})
    *  @method LazyLoad 执行函数函数懒加载
    *  @param {number} [minH=180] 图片距离屏幕下边框的距离小于minH时，执行createImg方法
+   *  @param {string} [tw_className='tw-lazy-load'] 标记需要处理的懒加载图片
    *  @param {object} [container=document] 父级元素
    *  @param {Array} [blurParame = [20, 20]] oss后缀（图片模糊)el1表示模糊半径，el2为正态分布的标准差，取值范围都为[1, 50]
    *  @param {number} [delay=20] 触发事件的时间间隔
@@ -16,7 +17,7 @@
     let minH = 180
     let clientH = document.documentElement.clientHeight
     let container = document
-    let imgs = container.getElementsByTagName('img')
+    let tw_className = 'tw-lazy-load'
     let obj = Object.assign({}, options)
     let blurParame = [20, 20]
     // 模糊句柄
@@ -41,11 +42,11 @@
       blurParame = Object.assign(blurParame, obj.blurParame)
       blurHandle = '/blur,r_'+ blurParame[0] +',s_' + blurParame[1]
     }
+    // 图片模糊
     let blurry = OSSTAG + blurHandle
-    if (obj.container) {
-      container = obj.container
-      imgs = container.getElementsByTagName('img')
-    }
+    if (obj.container) container = obj.container
+    if (obj.tw_className) tw_className = obj.tw_className
+    let imgs = container.getElementsByClassName(tw_className)
     if (obj.delay) {
       if (typeof obj.delay !== 'number') return console.error('参数delay数据类型为Number')
       if (obj.delay < 0) return console.error('参数delay必须大于0')
@@ -88,17 +89,16 @@
         src = obj.src.replace(blurry, '')
       }
       if (OSSlength > 0) src = obj.src.replace(blurHandle, '')
-      // let img = new Image()
-      // 获取图片的style
-      // if (obj.style) Object.assign(img.style, obj.style)
-      // img.className = obj.className
-      // img.src = src
       obj.src = src
-      // img.onload = function () {
-      //   let parent = obj.parentNode
-      //   if (parent) parent.replaceChild(img, obj)
-      // }
       n++
+    }
+    // 添加class
+    function addClass(item) {
+      if (/class/.test(item)) {
+        if (/class=\"/.test(item)) return item = item.replace('class="', 'class="' + tw_className + ' ')
+        return item = item.replace('class=\'', 'class=\'' + tw_className + ' ')
+      }
+      return item = item.replace('<img', '<img class="' + tw_className + '"')
     }
     /**
      *  @method blurPic 富文本添加图片模糊
@@ -108,6 +108,7 @@
     this.blurPic = (content) => {
       if (typeof content !== 'string') return console.error('handleBlur函数传参数据类型为String')
       content = content.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, (match, capture) => {
+        match = addClass(match)
         if (capture.indexOf(OSSTAG) >= 0) return match.replace(capture, capture + blurHandle)
         if (capture.indexOf(OSSTAG) < 0) return match.replace(capture, capture + blurry)
     })
@@ -121,16 +122,24 @@
       setTimeout(_ => {
         let el = document
         if (container) el = container
-        imgs = el.getElementsByTagName('img')
+        imgs = el.getElementsByClassName(tw_className)
       }, 0)
+    }
+    /**
+     *  @method initCounter 初始化计数器
+     */
+    this.initCounter = function (_) {
+      n = 0;
     }
     // 页面加载完成时调用
     window.onload = function () {
-      verticalScroll(imgs)
+      setTimeout(_ => {
+        verticalScroll(imgs)
+      }, 0)
     }
     // 页面滚动时调用
     window.onscroll = debounce(() => {
-      if (n === parseInt(imgs.length)) return
+      if (imgs.length !== 0 && n === parseInt(imgs.length)) return
       verticalScroll(imgs)
     }, delay)
   }
