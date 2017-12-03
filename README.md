@@ -48,7 +48,7 @@ window.onscroll()
 2、LazyLoad.initPic()
 > 页面调用接口，增加了页面的图片数量时，调用此接口，修改图片容器大小，没有返回值
 
-3. LazyLoad.initCounter()
+3、 LazyLoad.initCounter()
 > 同个页面切换视图需要重新初始化计数器。
 
 # 注意事项
