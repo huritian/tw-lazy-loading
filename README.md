@@ -48,6 +48,9 @@ window.onscroll()
 2、LazyLoad.initPic()
 > 页面调用接口，增加了页面的图片数量时，调用此接口，修改图片容器大小，没有返回值
 
+3. LazyLoad.initCounter()
+> 同个页面切换视图需要重新初始化计数器。
+
 # 注意事项
 > 如果DOM的IMG标签处，自定义了OSS的模糊句柄，那么需要在option内部传入blurParame
 > 富文本中懒加载图片的class是tw_className，在需要监听处的img的class属性上添加tw_className

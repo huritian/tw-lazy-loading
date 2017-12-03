@@ -54,12 +54,12 @@ if (process.env.NODE_ENV !== 'production') {
     plugins: [
       new webpack.DefinePlugin({
         'process.env': 'production'
+      }),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: false
+        }
       })
-      // new webpack.optimize.UglifyJsPlugin({
-      //   compress: {
-      //     warnings: false
-      //   }
-      // })
     ]
   })
 }
