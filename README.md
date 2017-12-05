@@ -37,7 +37,7 @@ option = {
 ```
 > 异步加载懒加载图片数据时需要在异步函数成功后调用
 ```javascript
-window.onscroll()
+LazyLoad.initPic()
 ```
 
 # 暴露的方法
@@ -47,9 +47,6 @@ window.onscroll()
 
 2、LazyLoad.initPic()
 > 页面调用接口，增加了页面的图片数量时，调用此接口，修改图片容器大小，没有返回值
-
-3、 LazyLoad.initCounter()
-> 同个页面切换视图需要重新初始化计数器。
 
 # 注意事项
 > 如果DOM的IMG标签处，自定义了OSS的模糊句柄，那么需要在option内部传入blurParame

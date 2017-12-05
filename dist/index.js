@@ -1,1 +1,233 @@
-!function(e,r){"object"==typeof exports&&"object"==typeof module?module.exports=r():"function"==typeof define&&define.amd?define([],r):"object"==typeof exports?exports.LazyLoad=r():e.LazyLoad=r()}(this,function(){return function(e){function r(t){if(n[t])return n[t].exports;var o=n[t]={i:t,l:!1,exports:{}};return e[t].call(o.exports,o,o.exports,r),o.l=!0,o.exports}var n={};return r.m=e,r.c=n,r.d=function(e,n,t){r.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:t})},r.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(n,"a",n),n},r.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},r.p="",r(r.s=0)}([function(e,r,n){"use strict";!function(r){var n=function(){function e(e){for(var n=document.documentElement.scrollTop||document.body.scrollTop||0,t=i;t<e.length;t++){var o=e[t].offsetTop;if(c<=o){var l=o-n-c;if(l>a)return!1;l<=a&&r(e[t])}else r(e[t])}}function r(e){if(e.src.indexOf(m)<0)return i++;var r="",n=e.src.length-e.src.indexOf(d)-g.length;0===n&&(r=e.src.replace(g,"")),n>0&&(r=e.src.replace(m,"")),e.src=r,i++}function n(e){return e=/class/.test(e)?/class=\"/.test(e)?e.replace('class="','class="'+u+" "):e.replace("class='","class='"+u+" "):e.replace("<img",'<img class="'+u+'"')}var t=this,o=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},i=0,a=180,c=document.documentElement.clientHeight,l=document,u="tw-lazy-load",s=Object.assign({},o),f=[20,20],m="/blur,r_"+f[0]+",s_"+f[1],d="?x-oss-process=image",p=20;if(s.minH){if("number"!=typeof s.minH)return console.error("参数minH数据类型为Number");if(s.minH<0)return console.error("参数minH必须大于0");a=s.minH}if(s.blurParame){if(!s.blurParame instanceof Array)return console.error("参数blurParame数据类型为Array");if(s.blurParame.length>2)return console.error("参数blurParame的长度应小于等于2");var b=s.blurParame[0];if(b<1||b>50)return console.error("blurParame元素取值范围是[1, 50]");if(s.blurParame[1]){var y=s.blurParame[1];if(y<1||y>50)return console.error("blurParame元素取值范围是[1, 50]")}f=Object.assign(f,s.blurParame),m="/blur,r_"+f[0]+",s_"+f[1]}var g=d+m;s.container&&(l=s.container),s.tw_className&&(u=s.tw_className);var v=l.getElementsByClassName(u);if(s.delay){if("number"!=typeof s.delay)return console.error("参数delay数据类型为Number");if(s.delay<0)return console.error("参数delay必须大于0");p=s.delay}this.blurPic=function(e){return"string"!=typeof e?console.error("handleBlur函数传参数据类型为String"):(e=e.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi,function(e,r){return e=n(e),r.indexOf(d)>=0?e.replace(r,r+m):r.indexOf(d)<0?e.replace(r,r+g):void 0}),t.initPic(),e)},this.initPic=function(e){setTimeout(function(e){var r=document;l&&(r=l),v=r.getElementsByClassName(u)},0)},this.initCounter=function(e){i=0},window.onload=function(){setTimeout(function(r){e(v)},0)},window.onscroll=function(e,r){var n=this,t=arguments,o=null;return function(i){var a=n,c=t;clearTimeout(o),o=setTimeout(function(){e.apply(a,c)},r)}}(function(){0!==v.length&&i===parseInt(v.length)||e(v)},p)};e.exports=n}()}])});
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["LazyLoad"] = factory();
+	else
+		root["LazyLoad"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+;(function (_) {
+  /**
+   *  LazyLoad
+   *  @description My method description. Image lazy loading
+   *  @constructor LazyLoad
+   *  @version 0.0.19
+   *  @example new LazyLoad({min: 20, blurry: '?x-oss-process=image/blur,r_3,s_2'})
+   *  @method LazyLoad 执行函数函数懒加载
+   *  @param {number} [minH=180] 图片距离屏幕下边框的距离小于minH时，执行createImg方法
+   *  @param {string} [tw_className='tw-lazy-load'] 标记需要处理的懒加载图片
+   *  @param {object} [container=document] 父级元素
+   *  @param {Array} [blurParame = [20, 20]] oss后缀（图片模糊)el1表示模糊半径，el2为正态分布的标准差，取值范围都为[1, 50]
+   *  @param {number} [delay=20] 触发事件的时间间隔
+   */
+  var LazyLoad = function LazyLoad() {
+    var _this2 = this;
+
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    var minH = 180;
+    var clientH = document.documentElement.clientHeight;
+    var container = document;
+    var tw_className = 'tw-lazy-load';
+    var obj = Object.assign({}, options);
+    var blurParame = [20, 20];
+    // 模糊句柄
+    var blurHandle = '/blur,r_' + blurParame[0] + ',s_' + blurParame[1];
+    // OSS开头
+    var OSSTAG = '?x-oss-process=image';
+    var delay = 20;
+    if (obj.minH) {
+      if (typeof obj.minH !== 'number') return console.error('参数minH数据类型为Number');
+      if (obj.minH < 0) return console.error('参数minH必须大于0');
+      minH = obj.minH;
+    }
+    if (obj.blurParame) {
+      if (!obj.blurParame instanceof Array) return console.error('参数blurParame数据类型为Array');
+      if (obj.blurParame.length > 2) return console.error('参数blurParame的长度应小于等于2');
+      var el1 = obj.blurParame[0];
+      if (el1 < 1 || el1 > 50) return console.error('blurParame元素取值范围是[1, 50]');
+      if (obj.blurParame[1]) {
+        var el2 = obj.blurParame[1];
+        if (el2 < 1 || el2 > 50) return console.error('blurParame元素取值范围是[1, 50]');
+      }
+      blurParame = Object.assign(blurParame, obj.blurParame);
+      blurHandle = '/blur,r_' + blurParame[0] + ',s_' + blurParame[1];
+    }
+    // 图片模糊
+    var blurry = OSSTAG + blurHandle;
+    if (obj.container) container = obj.container;
+    if (obj.tw_className) tw_className = obj.tw_className;
+    var imgs = container.getElementsByClassName(tw_className);
+    if (obj.delay) {
+      if (typeof obj.delay !== 'number') return console.error('参数delay数据类型为Number');
+      if (obj.delay < 0) return console.error('参数delay必须大于0');
+      delay = obj.delay;
+    }
+    // 懒加载执次数控制器
+    function debounce(fn, delay) {
+      var _this = this,
+          _arguments = arguments;
+
+      var timer = null;
+      return function (_) {
+        var context = _this,
+            args = _arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          fn.apply(context, args);
+        }, delay);
+      };
+    }
+    // 屏幕滚动
+    function verticalScroll(imgsArr) {
+      var scrollT = document.documentElement.scrollTop || document.body.scrollTop || 0;
+      for (var i = 0; i < imgsArr.length; i++) {
+        var offsetT = imgsArr[i].offsetTop;
+        if (clientH <= offsetT) {
+          var h = offsetT - scrollT - clientH;
+          if (h > minH) return false;
+          if (h <= minH) {
+            createImg(imgsArr[i]);
+          }
+        } else {
+          createImg(imgsArr[i]);
+        }
+      }
+    }
+    // 新建清晰图片
+    function createImg(obj) {
+      var flag = obj.src.indexOf(blurHandle);
+      if (flag < 0) return;
+      var src = '';
+      var OSSlength = obj.src.length - obj.src.indexOf(OSSTAG) - blurry.length;
+      if (OSSlength === 0) {
+        src = obj.src.replace(blurry, '');
+      }
+      if (OSSlength > 0) src = obj.src.replace(blurHandle, '');
+      obj.src = src;
+    }
+    // 添加class
+    function addClass(item) {
+      if (/class/.test(item)) {
+        if (/class=\"/.test(item)) return item = item.replace('class="', 'class="' + tw_className + ' ');
+        return item = item.replace('class=\'', 'class=\'' + tw_className + ' ');
+      }
+      return item = item.replace('<img', '<img class="' + tw_className + '"');
+    }
+    /**
+     *  @method blurPic 富文本添加图片模糊
+     *  @param {string} content 富文本内容
+     *  @returns {string} content
+     */
+    this.blurPic = function (content) {
+      if (typeof content !== 'string') return console.error('handleBlur函数传参数据类型为String');
+      content = content.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
+        match = addClass(match);
+        if (capture.indexOf(OSSTAG) >= 0) return match.replace(capture, capture + blurHandle);
+        if (capture.indexOf(OSSTAG) < 0) return match.replace(capture, capture + blurry);
+      });
+      _this2.initPic();
+      return content;
+    };
+    /**
+     *  @method initPic 图片初始化，当图片数量变化时使用
+     */
+    this.initPic = function (_) {
+      setTimeout(function (_) {
+        var el = document;
+        if (container) el = container;
+        imgs = el.getElementsByClassName(tw_className);
+        verticalScroll(imgs);
+      }, 0);
+    };
+    // // 页面加载完成时调用
+    // window.onload = function () {
+    //   setTimeout(_ => {
+    //     verticalScroll(imgs)
+    //   }, 0)
+    // }
+    // 页面滚动时调用
+    window.addEventListener('scroll', function (e) {
+      debounce(verticalScroll(imgs), 20);
+    });
+  };
+  module.exports = LazyLoad;
+})();
+
+/***/ })
+/******/ ]);
+});

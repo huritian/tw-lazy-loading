@@ -13,7 +13,6 @@
    *  @param {number} [delay=20] 触发事件的时间间隔
    */
   var LazyLoad = function (options = {}) {
-    let n = 0
     let minH = 180
     let clientH = document.documentElement.clientHeight
     let container = document
@@ -66,7 +65,7 @@
     // 屏幕滚动
     function verticalScroll(imgsArr) {
       let scrollT = document.documentElement.scrollTop || document.body.scrollTop || 0
-      for (let i = n; i < imgsArr.length; i++) {
+      for (let i = 0; i < imgsArr.length; i++) {
         let offsetT = imgsArr[i].offsetTop
         if (clientH <= offsetT) {
           let h = offsetT - scrollT - clientH
@@ -82,7 +81,7 @@
     // 新建清晰图片
     function createImg(obj){
       let flag = obj.src.indexOf(blurHandle)
-      if (flag < 0) return n++
+      if (flag < 0) return
       let src = ''
       let OSSlength = obj.src.length - obj.src.indexOf(OSSTAG) - blurry.length
       if (OSSlength === 0) {
@@ -90,7 +89,6 @@
       }
       if (OSSlength > 0) src = obj.src.replace(blurHandle, '')
       obj.src = src
-      n++
     }
     // 添加class
     function addClass(item) {
@@ -123,25 +121,19 @@
         let el = document
         if (container) el = container
         imgs = el.getElementsByClassName(tw_className)
-      }, 0)
-    }
-    /**
-     *  @method initCounter 初始化计数器
-     */
-    this.initCounter = function (_) {
-      n = 0;
-    }
-    // 页面加载完成时调用
-    window.onload = function () {
-      setTimeout(_ => {
         verticalScroll(imgs)
       }, 0)
     }
+    // // 页面加载完成时调用
+    // window.onload = function () {
+    //   setTimeout(_ => {
+    //     verticalScroll(imgs)
+    //   }, 0)
+    // }
     // 页面滚动时调用
-    window.onscroll = debounce(() => {
-      if (imgs.length !== 0 && n === parseInt(imgs.length)) return
-      verticalScroll(imgs)
-    }, delay)
+    window.addEventListener('scroll', e => {
+      debounce(verticalScroll(imgs), 20)
+    })
   }
   module.exports = LazyLoad
 })();
